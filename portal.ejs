@@ -1,0 +1,752 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MyChart - Kaiser Permanente</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background: #f5f7fa;
+            color: #333;
+            line-height: 1.4;
+        }
+
+        .header {
+            background: #1f4788;
+            color: white;
+            padding: 12px 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .kp-logo {
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        .epic-brand {
+            font-size: 12px;
+            color: #b3ccff;
+        }
+
+        .user-section {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .language-selector {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+
+        .lang-btn {
+            background: rgba(255,255,255,0.2);
+            color: white;
+            border: none;
+            padding: 4px 8px;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 11px;
+        }
+
+        .lang-btn.active {
+            background: rgba(255,255,255,0.4);
+        }
+
+        .provider-link {
+            background: rgba(255,255,255,0.15);
+            padding: 6px 12px;
+            border-radius: 4px;
+            color: white;
+            text-decoration: none;
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        .user-info {
+            font-size: 14px;
+        }
+
+        .mrn-info {
+            font-size: 11px;
+            color: #b3ccff;
+            margin-top: 2px;
+        }
+
+        .epic-nav {
+            background: #004085;
+            padding: 8px 0;
+            border-bottom: 1px solid #1f4788;
+        }
+
+        .epic-nav-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            gap: 25px;
+        }
+
+        .nav-item {
+            color: #b3ccff;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 500;
+            padding: 5px 0;
+            border-bottom: 2px solid transparent;
+        }
+
+        .nav-item.active {
+            color: white;
+            border-bottom-color: white;
+        }
+
+        .nav-item:hover {
+            color: white;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 25px 20px;
+        }
+
+        .main-grid {
+            display: grid;
+            grid-template-columns: 320px 1fr;
+            gap: 30px;
+            min-height: 100vh;
+        }
+
+        /* Mobile responsiveness */
+        @media (max-width: 768px) {
+            .main-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .header-content {
+                flex-direction: column;
+                gap: 10px;
+                text-align: center;
+            }
+
+            .epic-nav-content {
+                flex-wrap: wrap;
+                gap: 15px;
+            }
+
+            .info-grid {
+                grid-template-columns: 1fr;
+                gap: 10px;
+            }
+
+            .container {
+                padding: 20px 15px;
+            }
+
+            .left-panel, .right-panel {
+                padding: 20px;
+            }
+
+            .range-container {
+                flex-direction: column;
+                gap: 8px;
+            }
+
+            .range-label {
+                min-width: auto;
+            }
+
+            .range-slider {
+                margin: 0;
+            }
+        }
+
+        .left-panel {
+            background: white;
+            border-radius: 6px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            padding: 20px;
+            height: fit-content;
+            border: 1px solid #e1e8ed;
+        }
+
+        .right-panel {
+            background: white;
+            border-radius: 6px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            padding: 25px;
+            height: fit-content;
+            border: 1px solid #e1e8ed;
+        }
+
+        .section {
+            margin-bottom: 20px;
+        }
+
+        .section-title {
+            color: #1f4788;
+            font-size: 15px;
+            margin-bottom: 12px;
+            font-weight: 600;
+            border-bottom: 1px solid #e9ecef;
+            padding-bottom: 6px;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 15px;
+        }
+
+        .info-item {
+            background: #f8f9fa;
+            padding: 12px;
+            border-radius: 4px;
+            border-left: 3px solid #1f4788;
+            font-size: 13px;
+        }
+
+        .info-label {
+            font-weight: 600;
+            color: #555;
+            font-size: 11px;
+            margin-bottom: 3px;
+            text-transform: uppercase;
+        }
+
+        .info-value {
+            color: #333;
+            font-size: 13px;
+        }
+
+        .list-item {
+            background: #f8f9fa;
+            padding: 10px;
+            margin-bottom: 5px;
+            border-radius: 4px;
+            font-size: 13px;
+            border-left: 2px solid #dee2e6;
+            transition: all 0.2s ease;
+        }
+
+        .list-item:hover {
+            border-left-color: #1f4788;
+            background: #e7f3ff;
+        }
+
+        .appointment-box {
+            background: linear-gradient(135deg, #1f4788, #004085);
+            color: white;
+            padding: 18px;
+            border-radius: 6px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .appointment-box h3 {
+            color: white;
+            margin-bottom: 10px;
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        .form-group label {
+            display: block;
+            color: #333;
+            margin-bottom: 6px;
+            font-weight: 500;
+            font-size: 13px;
+        }
+
+        .form-group input, .form-group select, .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ced4da;
+            border-radius: 4px;
+            font-size: 14px;
+            font-family: inherit;
+            transition: border-color 0.2s ease;
+        }
+
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+            outline: none;
+            border-color: #1f4788;
+            box-shadow: 0 0 0 2px rgba(31, 71, 136, 0.1);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 70px;
+        }
+
+        .range-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 8px 0;
+        }
+
+        .range-label {
+            font-size: 11px;
+            color: #666;
+            min-width: 55px;
+            text-align: center;
+        }
+
+        .range-slider {
+            flex: 1;
+            height: 6px;
+            border-radius: 3px;
+            background: #e9ecef;
+            outline: none;
+            -webkit-appearance: none;
+            margin: 0 8px;
+        }
+
+        .range-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: #1f4788;
+            cursor: pointer;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+        }
+
+        .range-slider::-moz-range-thumb {
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: #1f4788;
+            cursor: pointer;
+            border: none;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+        }
+
+        .range-value {
+            font-weight: 600;
+            color: #1f4788;
+            min-width: 30px;
+            text-align: center;
+            font-size: 14px;
+            background: #e7f3ff;
+            padding: 3px 6px;
+            border-radius: 3px;
+            border: 1px solid #b3d9ff;
+        }
+
+        .submit-btn {
+            background: #1f4788;
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 4px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        .submit-btn:hover {
+            background: #004085;
+        }
+
+        .intake-intro {
+            background: #e7f3ff;
+            padding: 18px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+            border-left: 4px solid #1f4788;
+        }
+
+        .intake-intro h2 {
+            color: #1f4788;
+            font-size: 18px;
+            margin-bottom: 8px;
+        }
+
+        .intake-intro p {
+            font-size: 14px;
+            color: #666;
+            line-height: 1.5;
+        }
+
+        .personal-connection-section {
+            background: linear-gradient(135deg, #fff8e1, #e7f3ff);
+            padding: 18px;
+            border-radius: 6px;
+            border: 1px solid #e7f3ff;
+            margin-top: 15px;
+        }
+
+        .personal-connection-section .section-title {
+            color: #ff6b35;
+            font-size: 16px;
+        }
+
+        .epic-branding {
+            background: #f8f9fa;
+            padding: 12px;
+            border-radius: 4px;
+            border-left: 3px solid #28a745;
+            margin-bottom: 20px;
+            font-size: 12px;
+            color: #666;
+        }
+
+        .condition-icon, .procedure-icon {
+            margin-right: 6px;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="header-content">
+            <div class="logo-section">
+                <div style="display: flex; flex-direction: column;">
+                    <div class="kp-logo">Kaiser Permanente</div>
+                    <div class="epic-brand">MyChart | Powered by Epic</div>
+                </div>
+            </div>
+            <div class="user-section">
+                <div class="language-selector">
+                    <button class="lang-btn active" onclick="switchLanguage('en')">EN</button>
+                    <button class="lang-btn" onclick="switchLanguage('es')">ES</button>
+                    <button class="lang-btn" onclick="switchLanguage('zh')">中</button>
+                </div>
+                <a href="/provider" class="provider-link">Provider View</a>
+                <div class="user-info">
+                    <span data-translate="welcome">Welcome,</span> <%= patient.name %>
+                    <div class="mrn-info">MRN: <%= patient.memberId %></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="epic-nav">
+        <div class="epic-nav-content">
+            <a href="#" class="nav-item active">Summary</a>
+            <a href="#" class="nav-item">Test Results</a>
+            <a href="#" class="nav-item">Medications</a>
+            <a href="#" class="nav-item">Appointments</a>
+            <a href="#" class="nav-item">Messages</a>
+            <a href="#" class="nav-item">Billing</a>
+            <a href="#" class="nav-item">Health Summary</a>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="epic-branding">
+            <strong>🔗 EasyHealth AI:</strong> This MyChart session includes our new AI-powered pre-visit intake system to improve your care experience and help your provider prepare for your visit.
+        </div>
+
+        <div class="main-grid">
+            <div class="left-panel">
+                <div class="section">
+                    <div class="appointment-box">
+                        <h3 data-translate="upcomingAppointment">Next Appointment</h3>
+                        <div style="font-size: 15px; margin: 10px 0;">
+                            <strong><%= patient.upcomingAppointment.date %></strong><br>
+                            <%= patient.upcomingAppointment.time %>
+                        </div>
+                        <div style="font-size: 13px; margin: 6px 0;">
+                            <%= patient.upcomingAppointment.location %>
+                        </div>
+                        <div style="font-size: 13px;">
+                            <span data-translate="provider">Provider:</span> <%= patient.upcomingAppointment.provider %>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <h2 class="section-title" data-translate="personalInfo">Personal Information</h2>
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <div class="info-label" data-translate="dateOfBirth">Date of Birth</div>
+                            <div class="info-value"><%= patient.dateOfBirth %></div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label" data-translate="insurance">Insurance</div>
+                            <div class="info-value"><%= patient.insurance %></div>
+                        </div>
+                        <div class="info-item" style="grid-column: 1 / -1;">
+                            <div class="info-label" data-translate="primaryCareProvider">Primary Care Provider</div>
+                            <div class="info-value"><%= patient.primaryCare %></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <h2 class="section-title" data-translate="medicalHistory">Medical History</h2>
+                    <% patient.medicalHistory.forEach(function(condition, index) { %>
+                        <div class="list-item" style="border-left-color: <%= ['#dc3545', '#fd7e14', '#ffc107', '#28a745', '#17a2b8'][index % 5] %>;">
+                            <span class="condition-icon">
+                                <%= condition.includes('Diabetes') ? '🩺' : 
+                                    condition.includes('Hypertension') ? '❤️' : 
+                                    condition.includes('allergies') ? '🤧' : 
+                                    condition.includes('surgery') ? '🏥' : 
+                                    condition.includes('Family') ? '👨‍👩‍👧‍👦' : '📍' %>
+                            </span>
+                            <%= condition %>
+                        </div>
+                    <% }) %>
+                </div>
+
+                <div class="section">
+                    <h2 class="section-title" data-translate="recentProcedures">Recent Procedures</h2>
+                    <% patient.recentProcedures.forEach(function(procedure, index) { %>
+                        <div class="list-item" style="border-left-color: <%= ['#6f42c1', '#e83e8c', '#20c997', '#6610f2', '#fd7e14'][index % 5] %>;">
+                            <span class="procedure-icon">
+                                <%= procedure.includes('physical') ? '🩺' : 
+                                    procedure.includes('Blood') ? '🩸' : 
+                                    procedure.includes('Eye') ? '👁️' : 
+                                    procedure.includes('Mammogram') ? '🔍' : 
+                                    procedure.includes('Colonoscopy') ? '🏥' : '📋' %>
+                            </span>
+                            <%= procedure %>
+                        </div>
+                    <% }) %>
+                </div>
+
+                <div class="section">
+                    <h2 class="section-title" data-translate="billingInfo">Account Summary</h2>
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <div class="info-label" data-translate="currentBalance">Current Balance</div>
+                            <div class="info-value" style="color: #28a745; font-weight: bold;">$0.00</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label" data-translate="paymentMethod">Payment Method</div>
+                            <div class="info-value">•••• 4521</div>
+                        </div>
+                    </div>
+                    <div style="margin-top: 10px; text-align: center;">
+                        <a href="/billing" style="background: #1f4788; color: white; padding: 6px 12px; border-radius: 4px; text-decoration: none; font-size: 12px; font-weight: 500;">View Billing Details</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="right-panel">
+                <div class="intake-intro">
+                    <h2 data-translate="preVisitIntakeForm">EasyHealth AI Pre-Visit Intake</h2>
+                    <p data-translate="intakeFormDesc">Complete this EasyHealth AI-powered intake form to help your provider prepare for your visit with personalized insights and better connection opportunities. Integrated seamlessly into your Epic MyChart experience.</p>
+                </div>
+
+                <form action="/submit-survey" method="POST">
+                    <div class="section">
+                        <h3 class="section-title" data-translate="reasonForVisit">Visit Information</h3>
+
+                        <div class="form-group">
+                            <label for="primaryReason" data-translate="primaryReason">Primary reason for your visit:</label>
+                            <textarea name="primaryReason" id="primaryReason" required placeholder="Please describe the main reason for your visit today (e.g., follow-up for diabetes, annual physical, back pain, medication review, etc.)"></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="symptoms" data-translate="currentSymptoms">Current symptoms:</label>
+                            <textarea name="symptoms" id="symptoms" placeholder="Describe any symptoms you're experiencing, including when they started and how they affect your daily life"></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="painLevel" data-translate="painLevel">Pain level (0-10):</label>
+                            <div class="range-container">
+                                <span class="range-label" data-translate="noPain">No pain</span>
+                                <input type="range" name="painLevel" id="painLevel" class="range-slider" min="0" max="10" value="0">
+                                <span class="range-label" data-translate="severe">Severe</span>
+                                <div class="range-value" id="painValue">0</div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="mood">How are you feeling emotionally today?</label>
+                            <select name="mood" id="mood" required>
+                                <option value="">Select your current mood</option>
+                                <option value="nervous">Nervous/Anxious</option>
+                                <option value="confident">Confident</option>
+                                <option value="worried">Worried</option>
+                                <option value="hopeful">Hopeful</option>
+                                <option value="frustrated">Frustrated</option>
+                                <option value="calm">Calm</option>
+                                <option value="excited">Excited</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="visitGoals">What are your main goals for today's visit?</label>
+                            <textarea name="visitGoals" id="visitGoals" placeholder="List 2-3 specific things you want to accomplish during this appointment (e.g., discuss medication side effects, review test results, ask about back pain treatment)"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="section">
+                        <h3 class="section-title" data-translate="healthInfo">Health & Lifestyle Updates</h3>
+
+                        <div class="form-group">
+                            <label for="medications" data-translate="homeRemediesMedications">Medications or treatments tried since last visit:</label>
+                            <textarea name="medications" id="medications" placeholder="List any new medications, treatments, supplements, or home remedies you've tried since your last visit"></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="pronouns" data-translate="pronouns">Preferred pronouns:</label>
+                            <input type="text" name="pronouns" id="pronouns" placeholder="e.g., he/him, she/her, they/them">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="healthChanges" data-translate="recentHealthChanges">Recent health changes & new allergies:</label>
+                            <textarea name="healthChanges" id="healthChanges" placeholder="Describe any changes in your health since your last visit (weight changes, new symptoms, new allergies, medication reactions, etc.)"></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="lifeUpdates">Any significant life changes or events?</label>
+                            <textarea name="lifeUpdates" id="lifeUpdates" placeholder="New job, moving, family changes, major life events that might affect your health or stress levels"></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="stress" data-translate="stressLevel">Stress level (0-10):</label>
+                            <div class="range-container">
+                                <span class="range-label" data-translate="noStress">No stress</span>
+                                <input type="range" name="stress" id="stress" class="range-slider" min="0" max="10" value="0">
+                                <span class="range-label" data-translate="highStress">High stress</span>
+                                <div class="range-value" id="stressValue">0</div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="previousVisitFeedback">How did you feel about your last visit with us?</label>
+                            <select name="previousVisitFeedback" id="previousVisitFeedback">
+                                <option value="">Select an option</option>
+                                <option value="felt-rushed">Felt rushed</option>
+                                <option value="felt-heard">Felt heard and understood</option>
+                                <option value="needed-more-time">Needed more time</option>
+                                <option value="excellent-experience">Excellent experience</option>
+                                <option value="confusion-about-plan">Confused about care plan</option>
+                                <option value="first-visit">This is my first visit</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="section personal-connection-section">
+                        <h3 class="section-title" data-translate="personalConnection">Personal Connection 🌟</h3>
+                        <p style="color: #666; margin-bottom: 15px; font-size: 13px; font-style: italic;">
+                            These help your provider connect with you as a person and create a more personalized care experience.
+                        </p>
+
+                        <div class="form-group">
+                            <label for="favoriteMovie" data-translate="favoriteMovie">Favorite movie, TV show, or book:</label>
+                            <input type="text" name="favoriteMovie" id="favoriteMovie" placeholder="What's your favorite movie, TV show, or book?">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="funFact" data-translate="funFact">Something interesting about yourself:</label>
+                            <textarea name="funFact" id="funFact" placeholder="Share something interesting about yourself that might help your doctor connect with you (hobbies, achievements, travel, etc.)"></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="additionalComments" data-translate="additionalComments">Anything else you'd like your provider to know:</label>
+                            <textarea name="additionalComments" id="additionalComments" placeholder="Any additional information, questions, or concerns you'd like your provider to be aware of"></textarea>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="submit-btn" data-translate="submitIntakeForm">Submit EasyHealth AI Intake Form</button>
+
+                    <div style="margin-top: 15px; text-align: center;">
+                        <a href="/post-survey" style="background: #28a745; color: white; padding: 8px 16px; border-radius: 4px; text-decoration: none; font-size: 13px;" data-translate="postVisitForm">Post-Visit Feedback</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const translations = {
+            en: {
+                welcome: "Welcome,",
+                upcomingAppointment: "Next Appointment",
+                provider: "Provider:",
+                personalInfo: "Personal Information",
+                dateOfBirth: "Date of Birth",
+                insurance: "Insurance",
+                primaryCareProvider: "Primary Care Provider",
+                medicalHistory: "Medical History",
+                recentProcedures: "Recent Procedures",
+                billingInfo: "Account Summary",
+                currentBalance: "Current Balance",
+                paymentMethod: "Payment Method",
+                preVisitIntakeForm: "EasyHealth AI Pre-Visit Intake",
+                intakeFormDesc: "Complete this EasyHealth AI-powered intake form to help your provider prepare for your visit with personalized insights and better connection opportunities.",
+                reasonForVisit: "Visit Information",
+                primaryReason: "Primary reason for your visit:",
+                currentSymptoms: "Current symptoms:",
+                painLevel: "Pain level (0-10):",
+                noPain: "No pain",
+                severe: "Severe",
+                healthInfo: "Health & Lifestyle Updates",
+                homeRemediesMedications: "Medications or treatments tried since last visit:",
+                pronouns: "Preferred pronouns:",
+                recentHealthChanges: "Recent health changes & new allergies:",
+                stressLevel: "Stress level (0-10):",
+                noStress: "No stress",
+                highStress: "High stress",
+                personalConnection: "Personal Connection 🌟",
+                favoriteMovie: "Favorite movie, TV show, or book:",
+                funFact: "Something interesting about yourself:",
+                additionalComments: "Anything else you'd like your provider to know:",
+                submitIntakeForm: "Submit EasyHealth AI Intake Form",
+                postVisitForm: "Post-Visit Feedback"
+            }
+        };
+
+        let currentLanguage = 'en';
+
+        function switchLanguage(lang) {
+            currentLanguage = lang;
+            document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+        }
+
+        // Update slider values
+        document.getElementById('painLevel').addEventListener('input', function() {
+            document.getElementById('painValue').textContent = this.value;
+        });
+
+        document.getElementById('stress').addEventListener('input', function() {
+            document.getElementById('stressValue').textContent = this.value;
+        });
+    </script>
+</body>
+</html>

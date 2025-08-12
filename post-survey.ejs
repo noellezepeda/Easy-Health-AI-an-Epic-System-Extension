@@ -1,0 +1,508 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rate Your Visit - MyChart | Kaiser Permanente</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f5f7fa;
+            color: #333;
+            line-height: 1.4;
+        }
+
+        .header {
+            background: #0066cc;
+            color: white;
+            padding: 15px 0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        }
+
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .kp-logo {
+            background: white;
+            color: #0066cc;
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .mychart-title {
+            font-size: 20px;
+            font-weight: 600;
+        }
+
+        .breadcrumb {
+            background: #004499;
+            padding: 10px 0;
+            font-size: 14px;
+        }
+
+        .breadcrumb-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+            color: white;
+        }
+
+        .breadcrumb a {
+            color: #b3d9ff;
+            text-decoration: none;
+        }
+
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 30px 20px;
+        }
+
+        .survey-card {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.07);
+            border: 1px solid #e1e8ed;
+            overflow: hidden;
+        }
+
+        .survey-header {
+            background: linear-gradient(135deg, #f8f9fa, #e3f2fd);
+            padding: 30px;
+            text-align: center;
+            border-bottom: 1px solid #e1e8ed;
+        }
+
+        .survey-title {
+            color: #0066cc;
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .survey-subtitle {
+            color: #666;
+            margin-bottom: 20px;
+            font-size: 16px;
+        }
+
+        .provider-info {
+            background: #e8f5e8;
+            border: 1px solid #c3e6c3;
+            padding: 15px;
+            border-radius: 8px;
+            font-size: 14px;
+            display: inline-block;
+        }
+
+        .easyhealth-notice {
+            background: linear-gradient(135deg, #e8f5e8, #f0fff0);
+            border: 1px solid #c3e6c3;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 15px;
+            text-align: left;
+        }
+
+        .easyhealth-title {
+            color: #155724;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .easyhealth-description {
+            color: #1b5e20;
+            font-size: 13px;
+            line-height: 1.4;
+        }
+
+        .survey-form {
+            padding: 40px;
+        }
+
+        .form-section {
+            margin-bottom: 35px;
+        }
+
+        .section-title {
+            color: #0066cc;
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #e9ecef;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            color: #333;
+            margin-bottom: 12px;
+            font-weight: 500;
+            font-size: 16px;
+        }
+
+        .rating-container {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 15px 0;
+        }
+
+        .rating-controls {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 10px;
+        }
+
+        .rating-label {
+            font-size: 12px;
+            color: #666;
+            min-width: 80px;
+            text-align: center;
+            font-weight: 500;
+        }
+
+        .rating-slider {
+            flex: 1;
+            height: 8px;
+            border-radius: 4px;
+            background: linear-gradient(to right, #dc3545 0%, #ffc107 50%, #28a745 100%);
+            outline: none;
+            -webkit-appearance: none;
+            margin: 0 15px;
+        }
+
+        .rating-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: white;
+            border: 3px solid #0066cc;
+            cursor: pointer;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+        }
+
+        .rating-value {
+            font-weight: 700;
+            color: #0066cc;
+            min-width: 40px;
+            text-align: center;
+            font-size: 16px;
+            background: white;
+            padding: 8px 12px;
+            border-radius: 6px;
+            border: 2px solid #0066cc;
+        }
+
+        .rating-description {
+            text-align: center;
+            color: #666;
+            font-size: 14px;
+            font-weight: 500;
+            padding: 8px;
+            background: rgba(255,255,255,0.8);
+            border-radius: 4px;
+            margin-top: 8px;
+        }
+
+        .form-group textarea {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #e1e8ed;
+            border-radius: 8px;
+            font-size: 14px;
+            font-family: inherit;
+            resize: vertical;
+            min-height: 120px;
+            background: #fafbfc;
+        }
+
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #0066cc;
+            background: white;
+            box-shadow: 0 0 0 3px rgba(0, 102, 204, 0.1);
+        }
+
+        .submit-section {
+            background: #f8f9fa;
+            padding: 30px;
+            border-top: 1px solid #e1e8ed;
+            text-align: center;
+        }
+
+        .submit-btn {
+            background: #0066cc;
+            color: white;
+            padding: 15px 40px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            min-width: 200px;
+            transition: background-color 0.3s;
+        }
+
+        .submit-btn:hover {
+            background: #004499;
+        }
+
+        .privacy-note {
+            font-size: 12px;
+            color: #666;
+            margin-top: 15px;
+            line-height: 1.4;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px 15px;
+            }
+
+            .survey-header, .survey-form {
+                padding: 25px 20px;
+            }
+
+            .rating-controls {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .rating-slider {
+                width: 100%;
+                margin: 0;
+            }
+
+            .rating-label {
+                min-width: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="header-content">
+            <div class="logo-section">
+                <div class="kp-logo">KP</div>
+                <div class="mychart-title">MyChart</div>
+            </div>
+            <div style="text-align: right; font-size: 14px;">
+                <div style="font-weight: 600;">Sarah Johnson</div>
+                <div style="font-size: 12px; opacity: 0.9;">Post-Visit Survey</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="breadcrumb">
+        <div class="breadcrumb-content">
+            <a href="/portal">MyChart Home</a> > <span>Rate Your Visit</span>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="survey-card">
+            <div class="survey-header">
+                <h1 class="survey-title">⭐ Rate Your Recent Visit</h1>
+                <p class="survey-subtitle">
+                    Your feedback helps us improve our care and services at Kaiser Permanente South Bay
+                </p>
+                <div class="provider-info">
+                    <strong>Visit Details:</strong> Dr. Michael Chen • February 28, 2024 • South Bay Medical Center
+                </div>
+                <div class="easyhealth-notice">
+                    <div class="easyhealth-title">
+                        🤖 EasyHealth AI Feedback Integration
+                    </div>
+                    <div class="easyhealth-description">
+                        Your responses help improve our AI-powered pre-visit tools and enhance future patient experiences. 
+                        This feedback focuses on care quality and communication improvement.
+                    </div>
+                </div>
+            </div>
+
+            <form action="/submit-post-survey" method="POST" class="survey-form">
+                <div class="form-section">
+                    <h2 class="section-title">📊 Care Quality Assessment</h2>
+
+                    <div class="form-group">
+                        <label>Overall Experience with Your Visit Today:</label>
+                        <div class="rating-container">
+                            <div class="rating-controls">
+                                <span class="rating-label">Poor</span>
+                                <input type="range" name="overallRating" id="overallRating" class="rating-slider" min="1" max="10" value="5">
+                                <span class="rating-label">Excellent</span>
+                                <div class="rating-value" id="overallValue">5</div>
+                            </div>
+                            <div class="rating-description" id="overallDescription">Good</div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Provider Communication & Preparation:</label>
+                        <div class="rating-container">
+                            <div class="rating-controls">
+                                <span class="rating-label">Unprepared</span>
+                                <input type="range" name="communicationRating" id="communicationRating" class="rating-slider" min="1" max="10" value="5">
+                                <span class="rating-label">Excellent</span>
+                                <div class="rating-value" id="communicationValue">5</div>
+                            </div>
+                            <div class="rating-description" id="communicationDescription">Good</div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Did your provider seem well-informed about your concerns and connect with you personally?</label>
+                        <div class="rating-container">
+                            <div class="rating-controls">
+                                <span class="rating-label">Not at all</span>
+                                <input type="range" name="connectionRating" id="connectionRating" class="rating-slider" min="1" max="10" value="5">
+                                <span class="rating-label">Completely</span>
+                                <div class="rating-value" id="connectionValue">5</div>
+                            </div>
+                            <div class="rating-description" id="connectionDescription">Somewhat</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <h2 class="section-title">⏱️ Visit Experience</h2>
+
+                    <div class="form-group">
+                        <label>Wait Time Satisfaction:</label>
+                        <div class="rating-container">
+                            <div class="rating-controls">
+                                <span class="rating-label">Too Long</span>
+                                <input type="range" name="waitTimeRating" id="waitTimeRating" class="rating-slider" min="1" max="10" value="5">
+                                <span class="rating-label">Perfect</span>
+                                <div class="rating-value" id="waitTimeValue">5</div>
+                            </div>
+                            <div class="rating-description" id="waitTimeDescription">Acceptable</div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Time Spent with Provider:</label>
+                        <div class="rating-container">
+                            <div class="rating-controls">
+                                <span class="rating-label">Too Rushed</span>
+                                <input type="range" name="timeSpentRating" id="timeSpentRating" class="rating-slider" min="1" max="10" value="5">
+                                <span class="rating-label">Just Right</span>
+                                <div class="rating-value" id="timeSpentValue">5</div>
+                            </div>
+                            <div class="rating-description" id="timeSpentDescription">Adequate</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <h2 class="section-title">💬 Additional Feedback</h2>
+
+                    <div class="form-group">
+                        <label>What went well during your visit?</label>
+                        <textarea name="positiveComments" placeholder="Please share what you appreciated about your visit today..."></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label>How can we improve your experience?</label>
+                        <textarea name="improvementSuggestions" placeholder="Any suggestions for improving care, communication, or the pre-visit process..."></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Feedback about EasyHealth AI Pre-Visit Tool (if you used it):</label>
+                        <textarea name="easyHealthFeedback" placeholder="Optional: How was your experience with the pre-visit intake form? Did it help your provider understand your needs better?"></textarea>
+                    </div>
+                </div>
+
+                <div class="submit-section">
+                    <button type="submit" class="submit-btn">Submit Feedback</button>
+                    <div class="privacy-note">
+                        🔒 Your feedback is confidential and helps Kaiser Permanente improve patient care and our EasyHealth AI tools.<br>
+                        Thank you for taking the time to share your experience with us.
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        const descriptions = {
+            1: "Very Poor", 2: "Poor", 3: "Below Average", 4: "Fair", 5: "Good",
+            6: "Above Average", 7: "Very Good", 8: "Great", 9: "Excellent", 10: "Outstanding"
+        };
+
+        const connectionDescriptions = {
+            1: "Not at all", 2: "Barely", 3: "Slightly", 4: "Somewhat", 5: "Moderately",
+            6: "Well", 7: "Very well", 8: "Extremely well", 9: "Exceptionally", 10: "Completely"
+        };
+
+        const waitDescriptions = {
+            1: "Way Too Long", 2: "Too Long", 3: "Lengthy", 4: "A Bit Long", 5: "Acceptable",
+            6: "Reasonable", 7: "Good", 8: "Very Good", 9: "Great", 10: "Perfect"
+        };
+
+        const timeSpentDescriptions = {
+            1: "Very Rushed", 2: "Rushed", 3: "A Bit Rushed", 4: "Quick", 5: "Adequate",
+            6: "Good", 7: "Very Good", 8: "Thorough", 9: "Excellent", 10: "Perfect"
+        };
+
+        function updateRating(sliderId, valueId, descriptionId, descriptionSet = descriptions) {
+            const slider = document.getElementById(sliderId);
+            const valueDisplay = document.getElementById(valueId);
+            const descriptionDisplay = document.getElementById(descriptionId);
+
+            slider.addEventListener('input', function() {
+                const value = this.value;
+                valueDisplay.textContent = value;
+                descriptionDisplay.textContent = descriptionSet[value];
+            });
+        }
+
+        updateRating('overallRating', 'overallValue', 'overallDescription');
+        updateRating('communicationRating', 'communicationValue', 'communicationDescription');
+        updateRating('connectionRating', 'connectionValue', 'connectionDescription', connectionDescriptions);
+        updateRating('waitTimeRating', 'waitTimeValue', 'waitTimeDescription', waitDescriptions);
+        updateRating('timeSpentRating', 'timeSpentValue', 'timeSpentDescription', timeSpentDescriptions);
+    </script>
+</body>
+</html>

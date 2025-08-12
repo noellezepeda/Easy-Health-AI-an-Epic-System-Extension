@@ -1,0 +1,1073 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Epic - Chart Review | Kaiser Permanente</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background: #f8f9fa;
+            color: #333;
+            line-height: 1.3;
+            font-size: 13px;
+        }
+
+        .header {
+            background: #1f4788;
+            color: white;
+            padding: 8px 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.15);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-content {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .epic-logo {
+            font-weight: bold;
+            font-size: 20px;
+            color: white;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .epic-icon {
+            width: 24px;
+            height: 24px;
+            background: linear-gradient(135deg, #ff6b35, #f7931e);
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 12px;
+            color: white;
+        }
+
+        .kp-brand {
+            font-size: 11px;
+            color: #b3ccff;
+        }
+
+        .provider-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .patient-link {
+            background: rgba(255,255,255,0.15);
+            padding: 6px 12px;
+            border-radius: 4px;
+            color: white;
+            text-decoration: none;
+            font-size: 12px;
+        }
+
+        .provider-details {
+            text-align: right;
+            font-size: 13px;
+        }
+
+        .provider-name {
+            font-weight: 600;
+        }
+
+        .provider-title {
+            font-size: 11px;
+            color: #b3ccff;
+        }
+
+        .epic-nav {
+            background: #004085;
+            padding: 6px 0;
+            border-bottom: 1px solid #1f4788;
+        }
+
+        .epic-nav-content {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            gap: 25px;
+        }
+
+        .nav-item {
+            color: #b3ccff;
+            text-decoration: none;
+            font-size: 12px;
+            font-weight: 500;
+            padding: 4px 0;
+            border-bottom: 2px solid transparent;
+        }
+
+        .nav-item.active {
+            color: white;
+            border-bottom-color: white;
+        }
+
+        .container {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 10px 15px;
+        }
+
+        .patient-header {
+            background: white;
+            padding: 12px 15px;
+            border-radius: 4px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            margin-bottom: 10px;
+            border-left: 4px solid #1f4788;
+        }
+
+        .patient-banner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+
+        .patient-name {
+            font-size: 18px;
+            font-weight: bold;
+            color: #1f4788;
+        }
+
+        .patient-mrn {
+            font-size: 11px;
+            color: #666;
+        }
+
+        .patient-quick-info {
+            display: grid;
+            grid-template-columns: repeat(8, 1fr);
+            gap: 8px;
+            font-size: 10px;
+        }
+
+        .quick-info-item {
+            background: #f8f9fa;
+            padding: 4px 6px;
+            border-radius: 3px;
+            border-left: 2px solid #dee2e6;
+        }
+
+        .quick-info-label {
+            font-weight: 600;
+            color: #666;
+            font-size: 9px;
+            text-transform: uppercase;
+        }
+
+        .quick-info-value {
+            color: #333;
+            font-weight: 600;
+        }
+
+        /* EasyHealth AI Quick Connect - Optimized */
+        .quick-connect-card {
+            background: linear-gradient(135deg, #e8f5e8, #f0fff0);
+            padding: 10px 12px;
+            border-radius: 4px;
+            border: 2px solid #28a745;
+            margin-bottom: 10px;
+            box-shadow: 0 1px 3px rgba(40, 167, 69, 0.1);
+        }
+
+        .quick-connect-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 6px;
+        }
+
+        .quick-connect-title {
+            color: #155724;
+            font-size: 12px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .easyhealth-badge {
+            background: linear-gradient(135deg, #28a745, #20c997);
+            color: white;
+            padding: 2px 5px;
+            border-radius: 8px;
+            font-size: 8px;
+            font-weight: 600;
+        }
+
+        .quick-summary {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 8px;
+            margin-bottom: 6px;
+        }
+
+        .summary-item {
+            background: rgba(255,255,255,0.9);
+            padding: 6px 8px;
+            border-radius: 3px;
+            border-left: 2px solid #28a745;
+            font-size: 10px;
+        }
+
+        .summary-label {
+            font-weight: 600;
+            color: #155724;
+            font-size: 9px;
+            text-transform: uppercase;
+            margin-bottom: 2px;
+        }
+
+        .summary-value {
+            color: #333;
+            font-weight: 600;
+        }
+
+        .conversation-starter {
+            background: rgba(255,255,255,0.9);
+            padding: 6px 8px;
+            border-radius: 3px;
+            border-left: 2px solid #ff6b35;
+            font-size: 10px;
+            font-style: italic;
+            color: #666;
+            margin-bottom: 6px;
+        }
+
+        .quick-actions {
+            display: flex;
+            gap: 6px;
+        }
+
+        .btn-expand, .btn-sample {
+            background: #17a2b8;
+            color: white;
+            border: none;
+            padding: 3px 6px;
+            border-radius: 3px;
+            font-size: 9px;
+            cursor: pointer;
+            font-weight: 500;
+        }
+
+        .btn-sample {
+            background: #6c757d;
+        }
+
+        .expanded-details {
+            display: none;
+            margin-top: 8px;
+            padding: 8px;
+            background: rgba(255,255,255,0.95);
+            border-radius: 3px;
+            border-left: 2px solid #ff6b35;
+            font-size: 10px;
+        }
+
+        .expanded-details.show {
+            display: block;
+        }
+
+        .no-easyhealth {
+            background: #f8f9fa;
+            padding: 10px;
+            border-radius: 4px;
+            color: #666;
+            font-style: italic;
+            text-align: center;
+            border-left: 2px solid #6c757d;
+            font-size: 11px;
+        }
+
+        /* Main Chart Layout */
+        .chart-layout {
+            display: grid;
+            grid-template-columns: 280px 1fr 230px;
+            gap: 8px;
+            height: calc(100vh - 140px);
+        }
+
+        .left-sidebar, .right-sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .chart-section {
+            background: white;
+            border-radius: 4px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            border: 1px solid #e1e8ed;
+            overflow: hidden;
+        }
+
+        .section-header {
+            background: #f8f9fa;
+            padding: 8px 12px;
+            border-bottom: 1px solid #e1e8ed;
+            font-weight: 600;
+            font-size: 12px;
+            color: #1f4788;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .section-content {
+            padding: 8px 10px;
+            max-height: 160px;
+            overflow-y: auto;
+        }
+
+        .main-chart {
+            padding: 12px;
+            overflow-y: auto;
+        }
+
+        /* Vitals Display */
+        .vitals-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6px;
+        }
+
+        .vital-item {
+            background: #f1f8ff;
+            padding: 6px 8px;
+            border-radius: 3px;
+            font-size: 10px;
+            border-left: 2px solid #17a2b8;
+        }
+
+        .vital-label {
+            font-weight: 600;
+            color: #0c5460;
+            font-size: 9px;
+            text-transform: uppercase;
+            margin-bottom: 2px;
+        }
+
+        .vital-value {
+            color: #333;
+            font-weight: 700;
+            font-size: 11px;
+        }
+
+        .vital-trend {
+            font-size: 8px;
+            color: #666;
+        }
+
+        /* Labs Grid */
+        .labs-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4px;
+        }
+
+        .lab-item {
+            background: #f8f9fa;
+            padding: 4px 6px;
+            border-radius: 2px;
+            font-size: 9px;
+            border-left: 2px solid #28a745;
+        }
+
+        .lab-name {
+            font-weight: 600;
+            color: #155724;
+            font-size: 8px;
+            text-transform: uppercase;
+        }
+
+        .lab-value {
+            color: #333;
+            font-weight: 700;
+            font-size: 10px;
+        }
+
+        .lab-reference {
+            color: #666;
+            font-size: 7px;
+            font-style: italic;
+        }
+
+        .alert-value {
+            color: #dc3545 !important;
+            font-weight: 800;
+        }
+
+        /* Medical History */
+        .history-item {
+            background: #fff3cd;
+            padding: 6px 8px;
+            margin-bottom: 4px;
+            border-radius: 3px;
+            font-size: 10px;
+            border-left: 2px solid #ffc107;
+        }
+
+        .history-date {
+            font-size: 8px;
+            color: #856404;
+            font-weight: 600;
+        }
+
+        .history-condition {
+            color: #333;
+            font-weight: 600;
+        }
+
+        /* Medications */
+        .med-item {
+            background: #e2e3e5;
+            padding: 6px 8px;
+            margin-bottom: 4px;
+            border-radius: 3px;
+            font-size: 10px;
+            border-left: 2px solid #6c757d;
+        }
+
+        .med-name {
+            font-weight: 600;
+            color: #495057;
+        }
+
+        .med-details {
+            font-size: 9px;
+            color: #6c757d;
+        }
+
+        /* Chart visualization */
+        .chart-visual {
+            background: #f8f9fa;
+            padding: 10px;
+            border-radius: 4px;
+            border: 1px solid #e9ecef;
+            margin: 10px 0;
+        }
+
+        .chart-title {
+            font-size: 11px;
+            font-weight: 600;
+            color: #495057;
+            margin-bottom: 8px;
+        }
+
+        .trend-line {
+            display: flex;
+            align-items: end;
+            height: 60px;
+            gap: 2px;
+            margin-bottom: 5px;
+        }
+
+        .trend-bar {
+            background: linear-gradient(to top, #17a2b8, #5bc0de);
+            width: 12px;
+            border-radius: 1px;
+            position: relative;
+        }
+
+        .trend-labels {
+            display: flex;
+            justify-content: space-between;
+            font-size: 8px;
+            color: #666;
+        }
+
+        /* Assessment & Plan */
+        .assessment-item {
+            background: #f8f9fa;
+            padding: 10px;
+            border-radius: 4px;
+            border-left: 3px solid #1f4788;
+            margin-bottom: 8px;
+        }
+
+        .assessment-diagnosis {
+            font-weight: 600;
+            color: #1f4788;
+            font-size: 12px;
+            margin-bottom: 5px;
+        }
+
+        .assessment-plan {
+            font-size: 11px;
+            line-height: 1.4;
+            color: #333;
+        }
+
+        .alert-banner {
+            background: #f8d7da;
+            color: #721c24;
+            padding: 8px 12px;
+            border-radius: 4px;
+            border-left: 3px solid #dc3545;
+            margin-bottom: 10px;
+            font-size: 11px;
+            font-weight: 600;
+        }
+
+        @media (max-width: 1200px) {
+            .chart-layout {
+                grid-template-columns: 1fr;
+                gap: 8px;
+            }
+            
+            .quick-summary {
+                grid-template-columns: 1fr;
+                gap: 4px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="header-content">
+            <div class="logo-section">
+                <div class="epic-logo">
+                    <div class="epic-icon">E</div>
+                    Epic
+                </div>
+                <div style="display: flex; flex-direction: column;">
+                    <div class="kp-brand">Kaiser Permanente South Bay Medical Center</div>
+                </div>
+            </div>
+            <div class="provider-info">
+                <a href="/portal" class="patient-link">MyChart Portal</a>
+                <div class="provider-details">
+                    <div class="provider-name">Dr. Michael Chen, MD</div>
+                    <div class="provider-title">Internal Medicine • NPI: 1234567890</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="epic-nav">
+        <div class="epic-nav-content">
+            <a href="#" class="nav-item active">Chart Review</a>
+            <a href="#" class="nav-item">In Basket</a>
+            <a href="#" class="nav-item">Schedule</a>
+            <a href="#" class="nav-item">Orders</a>
+            <a href="#" class="nav-item">Results</a>
+            <a href="#" class="nav-item">Messages <span style="background: #dc3545; color: white; font-size: 9px; padding: 2px 4px; border-radius: 8px; margin-left: 4px;">1</span></a>
+            <a href="#" class="nav-item">Reporting</a>
+            <a href="/provider-feedback" class="nav-item">EasyHealth AI Insights</a>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- Patient Header -->
+        <div class="patient-header">
+            <div class="patient-banner">
+                <div>
+                    <div class="patient-name"><%= patient.name %> • F • 39y</div>
+                    <div class="patient-mrn">MRN: <%= patient.memberId %> • DOB: <%= patient.dateOfBirth %> • Next: <%= patient.upcomingAppointment.date %> <%= patient.upcomingAppointment.time %></div>
+                </div>
+                <div style="background: #e8f5e8; padding: 6px 10px; border-radius: 3px; font-size: 11px; font-weight: 600; color: #155724;">
+                    ACTIVE CHART • Room 204A
+                </div>
+            </div>
+            <div class="patient-quick-info">
+                <div class="quick-info-item">
+                    <div class="quick-info-label">Insurance</div>
+                    <div class="quick-info-value">KP HMO</div>
+                </div>
+                <div class="quick-info-item">
+                    <div class="quick-info-label">PCP</div>
+                    <div class="quick-info-value">Dr. Chen</div>
+                </div>
+                <div class="quick-info-item">
+                    <div class="quick-info-label">BMI</div>
+                    <div class="quick-info-value">24.8</div>
+                </div>
+                <div class="quick-info-item">
+                    <div class="quick-info-label">Blood Type</div>
+                    <div class="quick-info-value">O+</div>
+                </div>
+                <div class="quick-info-item">
+                    <div class="quick-info-label">Allergies</div>
+                    <div class="quick-info-value">PCN, Pollen</div>
+                </div>
+                <div class="quick-info-item">
+                    <div class="quick-info-label">Code Status</div>
+                    <div class="quick-info-value">Full</div>
+                </div>
+                <div class="quick-info-item">
+                    <div class="quick-info-label">Language</div>
+                    <div class="quick-info-value">English</div>
+                </div>
+                <div class="quick-info-item">
+                    <div class="quick-info-label">Smoking</div>
+                    <div class="quick-info-value">Never</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- EasyHealth AI Quick Connect -->
+        <% if (summary) { %>
+            <div class="quick-connect-card">
+                <div class="quick-connect-header">
+                    <div class="quick-connect-title">
+                        🔗 EasyHealth AI Quick Connect
+                        <span class="easyhealth-badge">AI</span>
+                    </div>
+                </div>
+                <div class="quick-summary">
+                    <div class="summary-item">
+                        <div class="summary-label">Mood</div>
+                        <div class="summary-value">Nervous/Anxious</div>
+                    </div>
+                    <div class="summary-item">
+                        <div class="summary-label">Primary Goal</div>
+                        <div class="summary-value">Medication Questions</div>
+                    </div>
+                    <div class="summary-item">
+                        <div class="summary-label">Personal</div>
+                        <div class="summary-value">She/Her • Marvel Movies</div>
+                    </div>
+                </div>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 4px; margin-bottom: 6px;">
+                    <div class="summary-item" style="margin-bottom: 0;">
+                        <div class="summary-label">Life Update</div>
+                        <div class="summary-value">New Job Stress</div>
+                    </div>
+                    <div class="summary-item" style="margin-bottom: 0;">
+                        <div class="summary-label">Interests</div>
+                        <div class="summary-value">Hiking, Tech Work</div>
+                    </div>
+                </div>
+                <div class="conversation-starter">
+                    💬 "Congrats on the new job! Let's discuss your medication concerns."
+                </div>
+                <div class="quick-actions">
+                    <button class="btn-expand" onclick="toggleExpanded()">View Full Details</button>
+                </div>
+                <div class="expanded-details" id="expandedDetails">
+                    <div style="white-space: pre-line; line-height: 1.4;"><%= summary %></div>
+                </div>
+            </div>
+        <% } else { %>
+            <div class="quick-connect-card">
+                <div class="quick-connect-header">
+                    <div class="quick-connect-title">
+                        🔗 EasyHealth AI Quick Connect
+                        <span class="easyhealth-badge">AI</span>
+                    </div>
+                </div>
+                <div id="sampleQuickData" style="display: none;">
+                    <div class="quick-summary">
+                        <div class="summary-item">
+                            <div class="summary-label">Mood</div>
+                            <div class="summary-value">Anxious</div>
+                        </div>
+                        <div class="summary-item">
+                            <div class="summary-label">Primary Goal</div>
+                            <div class="summary-value">Back Pain Discussion</div>
+                        </div>
+                        <div class="summary-item">
+                            <div class="summary-label">Personal</div>
+                            <div class="summary-value">They/Them • Action Films</div>
+                        </div>
+                    </div>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 4px; margin-bottom: 6px;">
+                        <div class="summary-item" style="margin-bottom: 0;">
+                            <div class="summary-label">Life Update</div>
+                            <div class="summary-value">Exercise Routine</div>
+                        </div>
+                        <div class="summary-item" style="margin-bottom: 0;">
+                            <div class="summary-label">Interests</div>
+                            <div class="summary-value">Gym, Hiking</div>
+                        </div>
+                    </div>
+                    <div class="conversation-starter">
+                        💬 "Great job starting that exercise routine! Let's discuss your back pain."
+                    </div>
+                    <div class="quick-actions">
+                        <button class="btn-expand" onclick="toggleSampleExpanded()">View Full Details</button>
+                    </div>
+                </div>
+                <div class="no-easyhealth" id="noDataMessage">
+                    No EasyHealth AI pre-visit intake completed for this patient.
+                </div>
+                <div class="quick-actions">
+                    <button class="btn-sample" onclick="loadSampleData()">Load Sample Data</button>
+                </div>
+                <div class="expanded-details" id="sampleDetails">
+                    <strong>Survey Data:</strong> Back pain 6/10, anxiety about progression, wants PT options<br>
+                    <strong>Personal:</strong> Recently joined gym, enjoys hiking, works in tech<br>
+                    <strong>Previous Feedback:</strong> Wanted more time for treatment discussion
+                </div>
+            </div>
+        <% } %>
+
+        <!-- Alert Banner -->
+        <div class="alert-banner">
+            ⚠️ CLINICAL ALERTS: A1C above goal (7.4%), LDL elevated (125), Hypertension trending up
+        </div>
+
+        <!-- Main Chart Layout -->
+        <div class="chart-layout">
+            <!-- Left Sidebar -->
+            <div class="left-sidebar">
+                <!-- Current Vitals -->
+                <div class="chart-section">
+                    <div class="section-header">
+                        <span>Current Vitals</span>
+                        <span style="font-size: 10px; color: #666;">Today 14:25</span>
+                    </div>
+                    <div class="section-content">
+                        <div class="vitals-grid">
+                            <div class="vital-item">
+                                <div class="vital-label">BP</div>
+                                <div class="vital-value">128/82</div>
+                                <div class="vital-trend">↑ from 120/78</div>
+                            </div>
+                            <div class="vital-item">
+                                <div class="vital-label">HR</div>
+                                <div class="vital-value">74 bpm</div>
+                                <div class="vital-trend">Normal</div>
+                            </div>
+                            <div class="vital-item">
+                                <div class="vital-label">Temp</div>
+                                <div class="vital-value">98.6°F</div>
+                                <div class="vital-trend">Normal</div>
+                            </div>
+                            <div class="vital-item">
+                                <div class="vital-label">RR</div>
+                                <div class="vital-value">16/min</div>
+                                <div class="vital-trend">Normal</div>
+                            </div>
+                            <div class="vital-item">
+                                <div class="vital-label">Weight</div>
+                                <div class="vital-value">145 lbs</div>
+                                <div class="vital-trend">Stable</div>
+                            </div>
+                            <div class="vital-item">
+                                <div class="vital-label">O2 Sat</div>
+                                <div class="vital-value">98%</div>
+                                <div class="vital-trend">Normal</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recent Labs -->
+                <div class="chart-section">
+                    <div class="section-header">
+                        <span>Recent Labs</span>
+                        <span style="font-size: 10px; color: #666;">Jan 15, 2024</span>
+                    </div>
+                    <div class="section-content">
+                        <div class="labs-grid">
+                            <div class="lab-item">
+                                <div class="lab-name">A1C</div>
+                                <div class="lab-value alert-value">7.4%</div>
+                                <div class="lab-reference">&lt;7.0%</div>
+                            </div>
+                            <div class="lab-item">
+                                <div class="lab-name">Glucose</div>
+                                <div class="lab-value alert-value">142</div>
+                                <div class="lab-reference">70-99</div>
+                            </div>
+                            <div class="lab-item">
+                                <div class="lab-name">Total Chol</div>
+                                <div class="lab-value">198</div>
+                                <div class="lab-reference">&lt;200</div>
+                            </div>
+                            <div class="lab-item">
+                                <div class="lab-name">LDL</div>
+                                <div class="lab-value alert-value">125</div>
+                                <div class="lab-reference">&lt;100</div>
+                            </div>
+                            <div class="lab-item">
+                                <div class="lab-name">HDL</div>
+                                <div class="lab-value">52</div>
+                                <div class="lab-reference">&gt;50</div>
+                            </div>
+                            <div class="lab-item">
+                                <div class="lab-name">Triglyc</div>
+                                <div class="lab-value">165</div>
+                                <div class="lab-reference">&lt;150</div>
+                            </div>
+                            <div class="lab-item">
+                                <div class="lab-name">Creatinine</div>
+                                <div class="lab-value">0.9</div>
+                                <div class="lab-reference">0.6-1.2</div>
+                            </div>
+                            <div class="lab-item">
+                                <div class="lab-name">eGFR</div>
+                                <div class="lab-value">87</div>
+                                <div class="lab-reference">&gt;60</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Active Problems -->
+                <div class="chart-section">
+                    <div class="section-header">
+                        <span>Active Problems</span>
+                        <span style="font-size: 10px; color: #666;">ICD-10</span>
+                    </div>
+                    <div class="section-content">
+                        <div class="history-item">
+                            <div class="history-date">2018 - Present</div>
+                            <div class="history-condition">Type 2 DM (E11.9)</div>
+                        </div>
+                        <div class="history-item">
+                            <div class="history-date">2020 - Present</div>
+                            <div class="history-condition">Essential HTN (I10)</div>
+                        </div>
+                        <div class="history-item">
+                            <div class="history-date">Seasonal</div>
+                            <div class="history-condition">Allergic Rhinitis (J30.1)</div>
+                        </div>
+                        <div class="history-item">
+                            <div class="history-date">2019</div>
+                            <div class="history-condition">S/P Knee Arthroscopy</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Main Chart Area -->
+            <div class="main-chart">
+                <!-- A1C Trend Chart -->
+                <div class="chart-visual">
+                    <div class="chart-title">📈 Hemoglobin A1C Trend (Last 12 months)</div>
+                    <div class="trend-line">
+                        <div class="trend-bar" style="height: 35px;"></div>
+                        <div class="trend-bar" style="height: 42px;"></div>
+                        <div class="trend-bar" style="height: 38px;"></div>
+                        <div class="trend-bar" style="height: 45px;"></div>
+                        <div class="trend-bar" style="height: 40px;"></div>
+                        <div class="trend-bar" style="height: 37px;"></div>
+                    </div>
+                    <div class="trend-labels">
+                        <span>Aug</span>
+                        <span>Oct</span>
+                        <span>Dec</span>
+                        <span>Jan</span>
+                        <span style="font-weight: 600; color: #dc3545;">Current: 7.4%</span>
+                    </div>
+                </div>
+
+                <!-- Assessment & Plan -->
+                <div style="margin-top: 15px;">
+                    <h3 style="color: #1f4788; font-size: 14px; margin-bottom: 10px; border-bottom: 2px solid #e9ecef; padding-bottom: 5px;">
+                        📋 Assessment & Plan
+                    </h3>
+                    
+                    <div class="assessment-item">
+                        <div class="assessment-diagnosis">1. Type 2 Diabetes Mellitus (E11.9) - Uncontrolled</div>
+                        <div class="assessment-plan">
+                            • A1C improved from 8.2% to 7.4% but remains above goal (&lt;7.0%)<br>
+                            • Continue Metformin 500mg BID, excellent adherence reported<br>
+                            • Consider adding Jardiance 10mg daily for additional glycemic control<br>
+                            • Recheck A1C in 3 months, dietitian referral if no improvement<br>
+                            • Continue SMBG, patient reports good technique
+                        </div>
+                    </div>
+
+                    <div class="assessment-item">
+                        <div class="assessment-diagnosis">2. Essential Hypertension (I10) - Suboptimal Control</div>
+                        <div class="assessment-plan">
+                            • BP trending upward: 120/78 → 128/82 mmHg today<br>
+                            • Continue Lisinopril 10mg daily, may increase to 20mg if trend continues<br>
+                            • Home BP monitoring recommended 2x daily x 1 week<br>
+                            • Lifestyle: sodium restriction (&lt;2g/day), increase exercise to 150min/week
+                        </div>
+                    </div>
+
+                    <div class="assessment-item">
+                        <div class="assessment-diagnosis">3. Dyslipidemia (E78.5) - Goal Not Met</div>
+                        <div class="assessment-plan">
+                            • LDL elevated at 125 mg/dL (goal &lt;100 for DM patient)<br>
+                            • Continue Atorvastatin 20mg daily, consider increase to 40mg<br>
+                            • Recheck lipid panel in 6-8 weeks after adjustment<br>
+                            • Dietary counseling reinforced
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Clinical Notes -->
+                <div style="margin-top: 15px;">
+                    <h3 style="color: #1f4788; font-size: 14px; margin-bottom: 10px; border-bottom: 2px solid #e9ecef; padding-bottom: 5px;">
+                        📝 Clinical Notes
+                    </h3>
+                    <div style="background: #f8f9fa; padding: 12px; border-radius: 4px; border-left: 3px solid #17a2b8; font-size: 12px; line-height: 1.4;">
+                        <strong>PHYSICAL EXAM:</strong><br>
+                        • General: Well-appearing female in NAD, alert and cooperative<br>
+                        • HEENT: Normocephalic, PERRLA, EOMI, no lymphadenopathy<br>
+                        • CV: RRR, no murmurs/rubs/gallops, distal pulses intact<br>
+                        • Pulm: CTA bilaterally, no wheezes/rales/rhonchi<br>
+                        • Abd: Soft, NT/ND, normal bowel sounds<br>
+                        • Ext: No edema, diabetic foot exam unremarkable<br>
+                        • Neuro: Alert, oriented x3, sensation intact to monofilament
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Sidebar -->
+            <div class="right-sidebar">
+                <!-- Current Medications -->
+                <div class="chart-section">
+                    <div class="section-header">
+                        <span>Active Medications</span>
+                        <span style="font-size: 10px; color: #666;">6 items</span>
+                    </div>
+                    <div class="section-content">
+                        <div class="med-item">
+                            <div class="med-name">Metformin</div>
+                            <div class="med-details">500mg PO BID • Last fill: 2/15</div>
+                        </div>
+                        <div class="med-item">
+                            <div class="med-name">Lisinopril</div>
+                            <div class="med-details">10mg PO daily • Last fill: 2/10</div>
+                        </div>
+                        <div class="med-item">
+                            <div class="med-name">Atorvastatin</div>
+                            <div class="med-details">20mg PO QHS • Last fill: 2/12</div>
+                        </div>
+                        <div class="med-item">
+                            <div class="med-name">Aspirin</div>
+                            <div class="med-details">81mg PO daily • OTC</div>
+                        </div>
+                        <div class="med-item">
+                            <div class="med-name">Multivitamin</div>
+                            <div class="med-details">1 tablet daily • OTC</div>
+                        </div>
+                        <div class="med-item">
+                            <div class="med-name">Cetirizine</div>
+                            <div class="med-details">10mg PRN allergies • OTC</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recent Procedures -->
+                <div class="chart-section">
+                    <div class="section-header">
+                        <span>Recent Procedures</span>
+                        <span style="font-size: 10px; color: #666;">Last 6 months</span>
+                    </div>
+                    <div class="section-content">
+                        <div style="font-size: 10px; padding: 4px 0; border-bottom: 1px solid #f0f0f0;">
+                            <strong>Jan 15, 2024</strong><br>
+                            Annual Physical Exam
+                        </div>
+                        <div style="font-size: 10px; padding: 4px 0; border-bottom: 1px solid #f0f0f0;">
+                            <strong>Dec 20, 2023</strong><br>
+                            Comprehensive Metabolic Panel
+                        </div>
+                        <div style="font-size: 10px; padding: 4px 0; border-bottom: 1px solid #f0f0f0;">
+                            <strong>Nov 15, 2023</strong><br>
+                            Ophthalmology Exam (DM)
+                        </div>
+                        <div style="font-size: 10px; padding: 4px 0; border-bottom: 1px solid #f0f0f0;">
+                            <strong>Oct 22, 2023</strong><br>
+                            Mammogram - Normal
+                        </div>
+                        <div style="font-size: 10px; padding: 4px 0;">
+                            <strong>Sep 18, 2023</strong><br>
+                            Colonoscopy - Normal
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Upcoming Orders -->
+                <div class="chart-section">
+                    <div class="section-header">
+                        <span>Today's Orders</span>
+                        <span style="font-size: 10px; color: #666;">Pending</span>
+                    </div>
+                    <div class="section-content">
+                        <div style="background: #fff3cd; padding: 6px; border-radius: 3px; margin-bottom: 4px; font-size: 10px;">
+                            <strong>Lab:</strong> A1C, Basic Metabolic Panel<br>
+                            <span style="color: #856404;">Due: 3 months</span>
+                        </div>
+                        <div style="background: #d1ecf1; padding: 6px; border-radius: 3px; margin-bottom: 4px; font-size: 10px;">
+                            <strong>Referral:</strong> Endocrinology<br>
+                            <span style="color: #0c5460;">If A1C remains elevated</span>
+                        </div>
+                        <div style="background: #d4edda; padding: 6px; border-radius: 3px; font-size: 10px;">
+                            <strong>Education:</strong> Diabetes self-management<br>
+                            <span style="color: #155724;">Scheduled</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function toggleExpanded() {
+            const details = document.getElementById('expandedDetails');
+            const btn = event.target;
+            if (details.classList.contains('show')) {
+                details.classList.remove('show');
+                btn.textContent = 'View Full Details';
+            } else {
+                details.classList.add('show');
+                btn.textContent = 'Hide Details';
+            }
+        }
+
+        function toggleSampleExpanded() {
+            const details = document.getElementById('sampleDetails');
+            const btn = event.target;
+            if (details.classList.contains('show')) {
+                details.classList.remove('show');
+                btn.textContent = 'View Full Details';
+            } else {
+                details.classList.add('show');
+                btn.textContent = 'Hide Details';
+            }
+        }
+
+        function loadSampleData() {
+            const quickData = document.getElementById('sampleQuickData');
+            const noDataMessage = document.getElementById('noDataMessage');
+            const btn = event.target;
+            if (quickData.style.display === 'none') {
+                quickData.style.display = 'block';
+                noDataMessage.style.display = 'none';
+                btn.textContent = 'Hide Sample';
+            } else {
+                quickData.style.display = 'none';
+                noDataMessage.style.display = 'block';
+                btn.textContent = 'Load Sample Data';
+            }
+        }
+    </script>
+</body>
+</html>

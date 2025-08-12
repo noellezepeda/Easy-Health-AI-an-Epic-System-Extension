@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thank You - MyChart | Kaiser Permanente</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f5f7fa;
+            color: #333;
+            line-height: 1.4;
+        }
+
+        .header {
+            background: #0066cc;
+            color: white;
+            padding: 15px 0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        }
+
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .kp-logo {
+            background: white;
+            color: #0066cc;
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .mychart-title {
+            font-size: 20px;
+            font-weight: 600;
+        }
+
+        .container {
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 50px 20px;
+            text-align: center;
+        }
+
+        .thank-you-card {
+            background: white;
+            padding: 50px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.07);
+            border: 1px solid #e1e8ed;
+        }
+
+        .success-icon {
+            font-size: 64px;
+            margin-bottom: 25px;
+            display: block;
+        }
+
+        .thank-you-title {
+            color: #28a745;
+            font-size: 28px;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .thank-you-subtitle {
+            color: #666;
+            font-size: 16px;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        .feedback-highlight {
+            background: #e8f5e8;
+            border: 1px solid #c3e6c3;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 25px 0;
+        }
+
+        .highlight-title {
+            color: #2e7d32;
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .highlight-text {
+            color: #1b5e20;
+            font-size: 14px;
+            line-height: 1.4;
+        }
+
+        .next-steps {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 25px 0;
+            text-align: left;
+        }
+
+        .next-steps h4 {
+            color: #0066cc;
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .next-steps ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .next-steps li {
+            padding: 8px 0;
+            border-bottom: 1px solid #e9ecef;
+            font-size: 14px;
+        }
+
+        .next-steps li:last-child {
+            border-bottom: none;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 30px;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s;
+        }
+
+        .btn-primary {
+            background: #0066cc;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #004499;
+            color: white;
+            text-decoration: none;
+        }
+
+        .btn-secondary {
+            background: #f8f9fa;
+            color: #666;
+            border: 1px solid #e1e8ed;
+        }
+
+        .btn-secondary:hover {
+            background: #e9ecef;
+            color: #333;
+            text-decoration: none;
+        }
+
+        .epic-footer {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #e9ecef;
+            font-size: 12px;
+            color: #666;
+        }
+
+        @media (max-width: 768px) {
+            .action-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .container {
+                padding: 30px 15px;
+            }
+
+            .thank-you-card {
+                padding: 30px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="header-content">
+            <div class="logo-section">
+                <div class="kp-logo">KP</div>
+                <div class="mychart-title">MyChart</div>
+            </div>
+            <div style="text-align: right; font-size: 14px;">
+                <div style="font-weight: 600;">Sarah Johnson</div>
+                <div style="font-size: 12px; opacity: 0.9;">Feedback Complete</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="thank-you-card">
+            <span class="success-icon">🙏</span>
+
+            <h1 class="thank-you-title">Thank You for Your Feedback!</h1>
+            <p class="thank-you-subtitle">
+                Your feedback has been successfully submitted and will help us continue to improve 
+                the quality of care and services at Kaiser Permanente South Bay.
+            </p>
+
+            <div class="feedback-highlight">
+                <div class="highlight-title">
+                    📈 Your Voice Matters
+                </div>
+                <div class="highlight-text">
+                    Patient feedback is essential to our commitment to providing exceptional healthcare. 
+                    Your responses will be reviewed by our quality improvement team and shared with 
+                    Dr. Michael Chen to enhance future patient experiences.
+                </div>
+            </div>
+
+            <div class="next-steps">
+                <h4>What Happens Next?</h4>
+                <ul>
+                    <li>📋 Your feedback will be reviewed within 2-3 business days</li>
+                    <li>📞 If you indicated concerns, a patient representative may contact you</li>
+                    <li>📊 Your responses contribute to our continuous quality improvement efforts</li>
+                    <li>💡 We may use your insights to enhance our AI-powered pre-visit tools</li>
+                </ul>
+            </div>
+
+            <div class="action-buttons">
+                <a href="/portal" class="btn btn-primary">Return to MyChart Home</a>
+                <a href="#" class="btn btn-secondary">Schedule Next Appointment</a>
+            </div>
+
+            <div class="epic-footer">
+                <div><strong>Kaiser Permanente South Bay Medical Center</strong></div>
+                <div style="margin-top: 5px;">Committed to your health and well-being • Powered by EPIC MyChart</div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

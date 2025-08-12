@@ -1,0 +1,255 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Check-In Complete - MyChart | Kaiser Permanente</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background: #f5f7fa;
+            color: #333;
+            line-height: 1.4;
+        }
+
+        .header {
+            background: #1f4788;
+            color: white;
+            padding: 12px 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .kp-logo {
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        .epic-brand {
+            font-size: 12px;
+            color: #b3ccff;
+        }
+
+        .user-info {
+            font-size: 14px;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 30px 20px;
+            text-align: center;
+        }
+
+        .success-card {
+            background: white;
+            padding: 35px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            border: 1px solid #e1e8ed;
+        }
+
+        .success-icon {
+            font-size: 64px;
+            color: #28a745;
+            margin-bottom: 20px;
+        }
+
+        .success-title {
+            color: #1f4788;
+            font-size: 24px;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .success-message {
+            color: #666;
+            font-size: 15px;
+            line-height: 1.6;
+            margin-bottom: 25px;
+        }
+
+        .ai-enhancement-notice {
+            background: #e7f3ff;
+            padding: 18px;
+            border-radius: 6px;
+            border-left: 4px solid #28a745;
+            margin-bottom: 25px;
+        }
+
+        .ai-enhancement-notice h3 {
+            color: #1f4788;
+            margin-bottom: 8px;
+            font-size: 16px;
+        }
+
+        .ai-enhancement-notice p {
+            color: #666;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .appointment-reminder {
+            background: #fff3cd;
+            padding: 20px;
+            border-radius: 6px;
+            border-left: 4px solid #ffc107;
+            margin-bottom: 25px;
+        }
+
+        .appointment-reminder h3 {
+            color: #856404;
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+
+        .appointment-details {
+            font-size: 15px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .next-steps {
+            background: #d1ecf1;
+            padding: 20px;
+            border-radius: 6px;
+            border-left: 4px solid #17a2b8;
+            margin-bottom: 25px;
+        }
+
+        .next-steps h3 {
+            color: #0c5460;
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+
+        .next-steps ul {
+            color: #0c5460;
+            text-align: left;
+            margin-left: 20px;
+            line-height: 1.7;
+        }
+
+        .btn {
+            background: #1f4788;
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 4px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            margin: 0 8px;
+        }
+
+        .btn:hover {
+            background: #004085;
+        }
+
+        .btn-secondary {
+            background: #6c757d;
+        }
+
+        .btn-secondary:hover {
+            background: #545b62;
+        }
+
+        .epic-footer {
+            margin-top: 30px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 6px;
+            font-size: 12px;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="header-content">
+            <div class="logo-section">
+                <div style="display: flex; flex-direction: column;">
+                    <div class="kp-logo">Kaiser Permanente</div>
+                    <div class="epic-brand">MyChart | Powered by Epic</div>
+                </div>
+            </div>
+            <div class="user-info">Welcome, <%= patient.name %></div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="success-card">
+            <div class="success-icon">✓</div>
+            <h1 class="success-title">EasyHealth AI Check-In Complete!</h1>
+            <p class="success-message">
+                Your EasyHealth AI pre-visit intake has been successfully submitted and integrated into your Epic MyChart record. 
+                Your healthcare provider now has personalized insights to make your visit more connected and efficient.
+            </p>
+
+            <div class="ai-enhancement-notice">
+                <h3>🤖 EasyHealth AI-Enhanced Care Experience</h3>
+                <p>
+                    Your responses have been analyzed by EasyHealth AI to create a personalized "Quick Connect" card for your provider. 
+                    This helps them understand your emotional state, life updates, and visit goals before entering the room.
+                </p>
+            </div>
+
+            <div class="appointment-reminder">
+                <h3>📅 Your Appointment Today</h3>
+                <div class="appointment-details">
+                    <strong><%= patient.upcomingAppointment.date %></strong> at <strong><%= patient.upcomingAppointment.time %></strong><br>
+                    <%= patient.upcomingAppointment.location %><br>
+                    Provider: <strong><%= patient.upcomingAppointment.provider %></strong>
+                </div>
+            </div>
+
+            <div class="next-steps">
+                <h3>🎯 Next Steps</h3>
+                <ul>
+                    <li><strong>Stay in the waiting area</strong> until called by medical staff</li>
+                    <li><strong>Your provider has been notified</strong> of your enhanced intake completion</li>
+                    <li><strong>Estimated wait time:</strong> 15-20 minutes</li>
+                    <li><strong>Your AI-generated insights</strong> are now available in your provider's Epic workspace</li>
+                </ul>
+            </div>
+
+            <p style="color: #666; margin-bottom: 25px; font-size: 14px;">
+                <strong>Epic Integration:</strong> Your EasyHealth AI intake data has been seamlessly integrated into Kaiser Permanente's Epic system, 
+                ensuring your provider has comprehensive pre-visit insights for improved care delivery.
+            </p>
+
+            <a href="/portal" class="btn">Return to MyChart</a>
+            <a href="/post-survey" class="btn btn-secondary">Complete Post-Visit (Later)</a>
+        </div>
+
+        <div class="epic-footer">
+            <strong>MyChart by Epic Systems</strong><br>
+            EasyHealth AI pre-visit intake represents Kaiser Permanente's commitment to personalized, 
+            technology-driven healthcare experiences. Your data is securely stored within Epic's certified healthcare platform.
+        </div>
+    </div>
+</body>
+</html>
